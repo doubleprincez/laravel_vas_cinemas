@@ -19,6 +19,7 @@ class CreateMoviesTable extends Migration
             $table->string('title');
             $table->string('movie_length')->nullable();
             $table->dateTime('release_year')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('available')->nullable()->default(true);
             $table->timestamps();
         });

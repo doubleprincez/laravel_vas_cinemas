@@ -39,7 +39,8 @@ class Cinema extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function movies() {
+    public function movies()
+    {
         return $this->belongsToMany(Movie::class, 'showtimes', 'cinema_id', 'movie_id');
     }
 }

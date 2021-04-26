@@ -14,11 +14,3 @@ use Modules\Core\Http\Controllers\CoreController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Welcome page is handled here showing the default laravel welcome page with products
-Route::get('/', function () {
-    return view('welcome');
-});
-// login and register
-Auth::routes();
-// check Core Route for more routes

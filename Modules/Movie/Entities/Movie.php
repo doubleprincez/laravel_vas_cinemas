@@ -23,8 +23,13 @@ class Movie extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
     public function cinema()
     {
-        return $this->belongsToMany(Cinema::class, 'showtimes', 'movie_id', 'cinema_id');
+        return $this->belongsToMany(Cinema::class, 'showtimes', 'movie_id', 'cinema_id')->withPivot(['start_time']);
     }
 }

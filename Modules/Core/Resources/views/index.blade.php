@@ -1,15 +1,7 @@
-@extends('core::layouts.master')
-@section('title') Home @endsection
+@extends('layouts.app')
+@section('title') WELCOME @endsection
 @section('content')
-    <h1>Hello World</h1>
+    <h1>Hello World Core Index</h1>
 
-    <p>
-        This view is loaded from module: {!! config('core.name') !!}
-    </p>
-    // Show all movies and if user is logged in you can watch
-    book
-    @isset($cinemas)
-        @dd($cinemas)
-    @endisset
 
 @endsection

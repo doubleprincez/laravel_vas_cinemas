@@ -26,6 +26,7 @@ class MovieFactory extends Factory
             'title' => $this->faker->sentence(5),
             'movie_length' => $this->faker->numberBetween(20, 250),
             'release_year' => $this->faker->dateTime,
+            'description' => $this->faker->paragraph(500),
             'available' => $this->faker->boolean
         ];
     }

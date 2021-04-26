@@ -4,6 +4,7 @@ namespace Modules\User\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Image\Entities\Image;
 use Modules\User\Entities\User;
 
 class UserTableSeeder extends Seeder
@@ -16,6 +17,6 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         if (User::count() < 1)
-            User::factory()->count(10)->create();
+            User::factory()->count(10)->has(Image::factory()->count(1))->create();
     }
 }

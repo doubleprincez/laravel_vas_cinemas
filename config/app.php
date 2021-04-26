@@ -15,7 +15,20 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'current_version'=>env('CURRENT_VERSION',1.0),
+    /*
+   |--------------------------------------------------------------------------
+   | Application Version
+   |--------------------------------------------------------------------------
+   |
+   | This value manages the version of the repository that is currently been employed.
+   | Every version follows a ps-4 naming convention ensuring consistency and easy migration.
+   | Your naming convention is a letter v followed by the numbers of the version
+   | using underscore to separate them without including the dots.
+   | once a new version is created, ensure it is included in the BindingServiceProvider
+   | check for the version to ensure all folders are loaded correctly
+   |
+   */
+    'current_version' => env('CURRENT_VERSION', 1.0),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +54,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +180,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        \App\Providers\BindingServiceProvider::class,
         /*
          * Application Service Providers...
          */

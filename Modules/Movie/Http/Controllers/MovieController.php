@@ -5,35 +5,25 @@ namespace Modules\Movie\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Movie\Contracts\MovieInterface as Repo;
 
 class MovieController extends Controller
 {
+    protected Repo $repo;
+
+    public function __construct(Repo $core)
+    {
+        $this->repo = $core;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('movie::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('movie::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
+        $movies = $this->repo->latestMovies(['genre']);
+        return view('movie::index', compact('movies'));
     }
 
     /**
@@ -43,37 +33,9 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        return view('movie::show');
+        $movie = $this->repo->findById($id, ['genre', 'cinema', 'image']);
+
+        return view('movie::show')->with(compact('movie'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('movie::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

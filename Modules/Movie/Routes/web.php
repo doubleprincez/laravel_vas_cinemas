@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('movie')->group(function() {
-    Route::get('/', 'MovieController@index');
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('movie')->group(function () {
+    Route::get('/', 'MovieController@index')->name('movies');
+    Route::get('/show/{id}', 'MovieController@show')->name('movie.show');
 });
