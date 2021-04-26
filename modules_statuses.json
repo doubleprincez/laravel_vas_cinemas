@@ -1,0 +1,9 @@
+{
+    "User": true,
+    "Showtime": true,
+    "Cinema": true,
+    "Movie": true,
+    "Core": true,
+    "Image": true,
+    "Town": true
+}
