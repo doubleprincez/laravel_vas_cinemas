@@ -57,16 +57,6 @@ class CinemaRepository extends CoreRepository implements CinemaInterface
         return $query->first();
     }
 
-    /**
-     * @param $cinema_id
-     */
-    public function getMoviesInCinema($cinema_id): \Illuminate\Pagination\LengthAwarePaginator
-    {
-        $movies = $this->model::with(['movies' => function ($movies) {
-            $movies->where('available', 1);
-        }, 'movies.genre', 'movies.image'])->where('id', $cinema_id)->firstOrFail()->movies;
-        if ($movies) return $this->paginate($movies, $this->per_page, $this->current_page);
-    }
 
     public function findById($id, array $with = array())
     {

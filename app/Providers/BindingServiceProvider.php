@@ -8,6 +8,7 @@ use Modules\Cinema\Contracts\CinemaInterface;
 use Modules\Core\Contracts\CoreInterface;
 use Modules\Core\Repository\CoreRepository;
 use Modules\Movie\Contracts\MovieInterface;
+use Modules\User\Contracts\UserInteface;
 
 class BindingServiceProvider extends ServiceProvider
 {
@@ -18,10 +19,15 @@ class BindingServiceProvider extends ServiceProvider
 
         $cinema_repo = 'Modules\Cinema\Repository\\' . $version . '\\CinemaRepository';
         $movie_repo = 'Modules\Movie\Repository\\' . $version . '\\MovieRepository';
-        $this->app->bind(CoreInterface::class, CoreRepository::class);
+        $user_repo = 'Modules\User\Repository\\' . $version . '\\UserRepository';
 
-        $this->app->bind(CinemaInterface::class, $cinema_repo);
-        $this->app->bind(MovieInterface::class, $movie_repo);
+        // Ensure all interfaces have their corresponding repositories included...
+        // both arrays must have equal length
+
+        $interfaces = [CoreInterface::class, CinemaInterface::class, MovieInterface::class, UserInteface::class,];
+        $repos = [CoreRepository::class, $cinema_repo, $movie_repo, $user_repo];
+
+        $this->bindRepos($interfaces, $repos);
     }
 
     /**
@@ -41,6 +47,14 @@ class BindingServiceProvider extends ServiceProvider
             $version = 'v_one_zero';
         }
         return $version;
+    }
+
+    private function bindRepos(array $interfaces, array $repositories): bool
+    {
+        foreach ($interfaces as $i => $key) {
+            $this->app->bind($interfaces[$i], $repositories[$i]);
+        }
+        return true;
     }
 
     public function boot()

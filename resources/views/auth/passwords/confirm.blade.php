@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title') Password Confirmation @endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

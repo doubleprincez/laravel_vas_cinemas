@@ -26,6 +26,3 @@ Route::get('/home', [CoreController::class, 'home'])->name('home');
 // Welcome page is handled here showing the default laravel welcome page with products
 Route::get('/', [CoreController::class, 'index'])->name('index');
 
-// login and register
-Auth::routes();
-// check Core Route for more routes

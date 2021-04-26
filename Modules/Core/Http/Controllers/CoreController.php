@@ -30,7 +30,7 @@ class CoreController extends Controller
     public function home()
     {
         $movies = $this->repo->latestMovies(['genre']);
-        return view('core::index')->with(compact('movies'));
+        return view('welcome')->with(compact('movies'));
     }
 
 }

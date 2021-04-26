@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Image\Entities\Image;
 use Modules\Movie\Entities\Movie;
+use Modules\User\Entities\User;
+use Modules\User\Entities\Watch;
 
 /**
  * Class Cinema
@@ -42,5 +44,10 @@ class Cinema extends Model
     public function movies()
     {
         return $this->belongsToMany(Movie::class, 'showtimes', 'cinema_id', 'movie_id');
+    }
+
+    public function watchers()
+    {
+        return $this->hasManyThrough(User::class, Watch::class);
     }
 }

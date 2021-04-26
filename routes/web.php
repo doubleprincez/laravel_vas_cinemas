@@ -14,3 +14,6 @@ use Modules\Core\Http\Controllers\CoreController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// login and register
+Auth::routes();

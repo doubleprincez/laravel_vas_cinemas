@@ -11,6 +11,7 @@ use Modules\Movie\Entities\Genre;
 use Modules\Movie\Entities\Movie;
 use Modules\Showtime\Entities\Showtime;
 use Modules\Town\Entities\Town;
+use Modules\User\Entities\Watch;
 
 class MovieTableSeeder extends Seeder
 {
@@ -41,7 +42,8 @@ class MovieTableSeeder extends Seeder
                 });
                 foreach ($movies as $movie) {
                     $rand = random_int(1, 20); // this is only available from php v 7.0+
-                    Showtime::create(['movie_id' => $movie->id, 'cinema_id' => $cinema->id, 'start_time' => $now->addDays($rand)]);
+                    $showtime = Showtime::create(['movie_id' => $movie->id, 'cinema_id' => $cinema->id, 'start_time' => $now->addDays($rand)]);
+                    Watch::factory()->count(1)->create(['start_time' => $showtime->start_time, 'cinema_id' => $cinema->id, 'movie_id' => $movie->id]);
                 }
             }
 

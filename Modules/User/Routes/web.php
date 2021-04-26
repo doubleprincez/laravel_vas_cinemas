@@ -11,6 +11,10 @@
 |
 */
 
-Route::prefix('user')->group(function() {
-    Route::get('/', 'UserController@index');
-});
+use Illuminate\Support\Facades\Route;
+
+//Route::prefix('user')->group(function() {
+Route::get('/watch', 'UserController@watch')->name('watch');
+
+Route::post('/watch', 'UserController@store_watch')->name('watch');
+//});

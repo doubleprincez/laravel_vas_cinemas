@@ -33,7 +33,14 @@
                                                 Time: {{ $time }}
                                             </p>
                                             <p>
-                                                <a href="{{ route('watch',['cinema_id'=>$cinema->id,'movie_id'=>$movie->id]) }}"></a>
+                                            <form action="{{ route('watch') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="cinema_id" value="{{ $cinema->id }}">
+                                                <input type="hidden" name="movie_id" value="{{ $movie->id }}">
+                                                <input type="hidden" name="start_time"
+                                                       value="{{ $cinema->pivot->start_time}}">
+                                                <button type="submit" class="btn btn-outline-secondary">Watch</button>
+                                            </form>
                                             </p>
                                         </div>
                                     @endif
@@ -42,7 +49,7 @@
                         @endisset
                     </div>
                     <div class="col-12">
-                        <a href="{{ url()->previous() }}" class="btn btn-outline-primary"> Back</a>
+                        <a href="{{ route('movies') }}" class="btn btn-outline-primary"> Back</a>
                     </div>
                 </div>
             </div>

@@ -86,4 +86,21 @@ interface CoreInterface
      * @return mixed
      */
     public function latest(array $with = array());
+
+    /**
+     * Create new Record
+     * @param array $attributes
+     * @return mixed
+     */
+    public function store(array $attributes = array());
+
+    /**
+     * Update Previous record using the record's ID
+     * @param $id
+     * @param array $attributes
+     * @return mixed
+     */
+    public function update($id, array $attributes = array());
+
+
 }

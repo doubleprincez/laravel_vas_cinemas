@@ -49,9 +49,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function image()
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function watching(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Watch::class);
     }
 
 }
