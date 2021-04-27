@@ -29,8 +29,11 @@ class TownController extends Controller
             $cookie = \cookie('town', $id, 360);
             $response = 'success';
             $message = 'Town Set';
+            notify()->success($message);
+
         } else {
             $cookie = Cookie::get('town');
+            notify()->error($message);
         }
         return response()->json(compact('response', 'message'))->withCookie($cookie);
     }

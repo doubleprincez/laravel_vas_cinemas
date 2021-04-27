@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    @notifyCss
 </head>
 <body>
 <div id="app">
@@ -26,6 +27,8 @@
         @yield('content')
     </main>
 </div>
+<x:notify-messages />
+@notifyJs
 @stack('scripts')
 </body>
 </html>

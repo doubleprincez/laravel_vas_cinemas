@@ -182,6 +182,7 @@ return [
          */
         \App\Providers\BindingServiceProvider::class,
         Watson\Active\ActiveServiceProvider::class,
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         /*
          * Application Service Providers...
          */

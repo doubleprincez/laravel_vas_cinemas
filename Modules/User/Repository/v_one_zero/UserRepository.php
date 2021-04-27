@@ -23,6 +23,8 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
      */
     public function store(array $attributes = array())
     {
+        $type = 'error';
+        $message = 'Seat Capacity is Full';
         $user_id = auth()->id();
         $movie_id = (int)$attributes['movie_id'];
         $cinema_id = (int)$attributes['cinema_id'];
@@ -44,9 +46,13 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
             $query->movie_id = $movie_id;
             $query->start_time = $start_time;
             $query->save();
-            return ['success' => 'Watching Saved'];
+            $message = 'Watching Saved';
+            $type = 'success';
+            notify()->success($message);
+            return [$type => $message];
         }
-        return ['error' => 'Seat Capacity is Full'];
+        notify()->error($message);
+        return [$type => $message];
 
     }
 
@@ -104,6 +110,8 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
      */
     public function cancel(array $attributes = array()): array
     {
+        $type = 'error';
+        $message = 'Deleted already';
         $user_id = auth()->id();
         $movie_id = (int)$attributes['movie_id'];
         $cinema_id = (int)$attributes['cinema_id'];
@@ -113,8 +121,12 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
 //        dd(Watch::where('user_id', $user_id)->get());
         if ($check->count() > 0) {
             $check->delete();
-            return ['success' => 'You are no more watching this movie'];
+            $type = 'success';
+            $message = 'You are no more watching this movie'
+            notify()->success($message);
+            return [$type => $message];
         }
-        return ['success' => 'Deleted already'];
+        notify()->error($message);
+        return [$type => $message];
     }
 }
