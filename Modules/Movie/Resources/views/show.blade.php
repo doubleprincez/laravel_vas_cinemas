@@ -4,7 +4,7 @@
     <section>
         <div class="jumbotron-fluid">
             <div class="container">
-                <h2> {{ __('movie::names.name') }}: {{ $movie->title }} </h2>
+                <h2 class="font-weight-bolder text-lg"> {{ __('movie::names.name') }}: {{ $movie->title }} </h2>
             </div>
             <div class="container">
                 <div class="row">
