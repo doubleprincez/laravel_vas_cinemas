@@ -13,5 +13,6 @@ return [
     'length' => 'Movie Length',
     'visit' => 'Visit',
     'read_more' => 'Read More',
-    'list_of_cinemas' => 'List of Cinemas In '
+    'list_of_cinemas' => 'List of Cinemas In ',
+    'watched_on'=>'Watched on '
 ];

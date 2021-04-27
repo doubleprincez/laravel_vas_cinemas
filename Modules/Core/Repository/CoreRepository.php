@@ -103,12 +103,6 @@ abstract class CoreRepository
     }
 
 
-    public function allTowns(array $with = array())
-    {
-        $query = $this->getModel(new Town())::with($with);
-        return $query->get();
-    }
-
     public function latest(array $with = array())
     {
         $query = $this->relation($with);
@@ -116,33 +110,9 @@ abstract class CoreRepository
     }
 
 
-    /**
-     * @inheritDoc
-     */
     public function allPaginated(array $with = array(), array $where = array())
     {
         return $this->paginate($this->relation($with)->where([$where])->get()); // TODO: Implement allPaginated() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getTown(array $with = null, $code = null)
-    {
-        // TODO: Implement getTown() method.
-        return $this->relation($with)->where('code', $code)->firstOrFail();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getMoviesInCinema($cinema_id): ?LengthAwarePaginator
-    {
-        // TODO: Implement getMoviesInCinema() method.
-        $movies = $this->model::with(['movies' => function ($movies) {
-            $movies->where('available', 1);
-        }, 'movies.genre', 'movies.image'])->where('id', $cinema_id)->firstOrFail()->movies;
-        if ($movies) return $this->paginate($movies, $this->per_page, $this->current_page);
     }
 
 

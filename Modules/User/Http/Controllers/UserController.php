@@ -5,7 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\User\Contracts\UserInteface as Repo;
+use Modules\User\Contracts\UserInterface as Repo;
 
 class UserController extends Controller
 {
@@ -39,5 +39,11 @@ class UserController extends Controller
     {
         $store = $this->repo->store(request()->all());
         return back()->with($store);
+    }
+
+    public function watched()
+    {
+        $watched = $this->repo->watched();
+        return view('user::watched')->with(compact('watched'));
     }
 }

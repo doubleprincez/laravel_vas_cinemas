@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/watch', 'UserController@watch')->name('watch');
 
 Route::post('/watch', 'UserController@store_watch')->name('watch');
+
+Route::get('/watched', 'UserController@watched')->name('watched');
 //});

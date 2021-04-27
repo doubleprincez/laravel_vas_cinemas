@@ -8,7 +8,7 @@ use Modules\Cinema\Contracts\CinemaInterface;
 use Modules\Core\Contracts\CoreInterface;
 use Modules\Core\Repository\CoreRepository;
 use Modules\Movie\Contracts\MovieInterface;
-use Modules\User\Contracts\UserInteface;
+use Modules\User\Contracts\UserInterface;
 
 class BindingServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class BindingServiceProvider extends ServiceProvider
         // Ensure all interfaces have their corresponding repositories included...
         // both arrays must have equal length
 
-        $interfaces = [CoreInterface::class, CinemaInterface::class, MovieInterface::class, UserInteface::class,];
+        $interfaces = [CoreInterface::class, CinemaInterface::class, MovieInterface::class, UserInterface::class,];
         $repos = [CoreRepository::class, $cinema_repo, $movie_repo, $user_repo];
 
         $this->bindRepos($interfaces, $repos);
