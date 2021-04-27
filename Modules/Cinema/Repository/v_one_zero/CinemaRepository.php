@@ -42,20 +42,21 @@ class CinemaRepository extends CoreRepository implements CinemaInterface
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      */
 
-    public function getTown(array $with = null, $code = null)
+    public function getTown(array $with = array(), $code = null)
     {
+
         $default_town = env('DEFAULT_TOWN', 'lagos');
         if ($code) {
             $query = $this->getModel(new Town())::with($with)->where('code', $code);
-        } elseif (request()->has('town')) {
-            $filter = $this->filter(request()->get('town'));
-            $query = $this->getModel(new Town())::with($with)->where('code', $filter);
+        } elseif (request()->hasCookie('town')) {
+            $filter = $this->filter(request()->cookie('town'));
+            $query = $this->getModel(new Town())::with($with)->where('id', $filter);
         } else {
             // default town
             $query = $this->getModel(new Town())::with($with)->where('code', $default_town);
         }
+        return  $query->first();
 
-        return $query->first();
     }
 
 
@@ -81,10 +82,10 @@ class CinemaRepository extends CoreRepository implements CinemaInterface
     /**
      * @inheritDoc
      */
-    public function allTowns(array $with = array())
+    public function allTowns()
     {
         // TODO: Implement allTowns() method.
         $query = $this->getModel(new Town);
-        return $query::with($with)->get();
+        return $query::all();
     }
 }

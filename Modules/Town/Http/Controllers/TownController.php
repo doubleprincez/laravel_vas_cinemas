@@ -5,6 +5,7 @@ namespace Modules\Town\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cookie;
 
 class TownController extends Controller
 {
@@ -14,66 +15,23 @@ class TownController extends Controller
      */
     public function index()
     {
-        return view('town::index');
+//        return view('town::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function changeTown()
     {
-        return view('town::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('town::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('town::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $response = 'error';
+        $message = 'Town not Found';
+        if (request()->has('townId')) {
+            $id = (int)request()->get('townId');
+            // store new cinema in cookie session
+            Cookie::queue('town', $id, 360);
+            $cookie = \cookie('town', $id, 360);
+            $response = 'success';
+            $message = 'Town Set';
+        } else {
+            $cookie = Cookie::get('town');
+        }
+        return response()->json(compact('response', 'message'))->withCookie($cookie);
     }
 }

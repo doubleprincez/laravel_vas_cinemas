@@ -16,14 +16,13 @@ interface CinemaInterface extends CoreInterface
      * @param null $code
      * @return mixed
      */
-    public function getTown(array $with = null, $code = null);
+    public function getTown(array $with = array(), $code = null);
 
     /**
      * Get all towns record
-     * @param array $with
      * @return mixed
      */
-    public function allTowns(array $with = array());
+    public function allTowns();
 
     /**
      * Use the Cinema id to find movies in that cinema

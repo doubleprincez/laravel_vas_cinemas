@@ -3,10 +3,21 @@
 @section('content')
     <section class="container-md">
         @isset($town)
-            <h3>{{ __('cinema::names.list_of_cinemas') }} {{ $town }}</h3>
+            <h3>{{ __('cinema::names.list_of_cinemas') }} {{ $town->name }}</h3>
         @else
             <h3>List of Cinemas</h3>
         @endisset
+        <div class="container">
+            <div class="w-25 ">
+                <select name="name" class="custom-select" onchange="changeTown($(this))">
+                    <option value="">@isset($town) {{ $town->name }}@else Select Town @endisset</option>
+                    @foreach($towns as $town)
+                        <option value="{{ $town->id }}">{{ $town->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <br class="clearfix"/>
+        </div>
         @isset($cinemas)
             <div class="row align-items-center">
                 @foreach($cinemas as $cinema)
@@ -30,3 +41,22 @@
     </section>
 
 @endsection
+@push('scripts')
+    <script>
+        let changeTown = (el) => {
+            let selectedId = el.val();
+            let url = '{{ route('town.change') }}';
+
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {townId: selectedId,"_token": "{{ csrf_token() }}"},
+                success: function (data) {
+                    if (data.response === 'success') {
+                        window.location.href = '{{ url()->current() }}'
+                    }
+                }
+            })
+        }
+    </script>
+@endpush

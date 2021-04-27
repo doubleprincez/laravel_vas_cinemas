@@ -15,8 +15,8 @@
                 <li class="nav-item {{ active(['cinema','cinema/*']) }}"><a href="{{ route('cinemas') }}"
                                                                             class="nav-link">
                         Cinema</a></li>
-                <li class="nav-item {{ active(['movies','movies/*']) }}"><a href="{{ route('movies') }}"
-                                                                            class="nav-link"> Movies</a>
+                <li class="nav-item {{ active(['movies','movies/*','movie/*']) }}"><a href="{{ route('movies') }}"
+                                                                                      class="nav-link"> Movies</a>
                 </li>
             </ul>
 

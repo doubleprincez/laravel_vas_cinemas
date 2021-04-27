@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+//Route::prefix('town')->group(function() {
+//    Route::get('/', 'TownController@index');
+//});
 
-Route::prefix('town')->group(function() {
-    Route::get('/', 'TownController@index');
-});
+use Illuminate\Support\Facades\Route;
+
+Route::post('town/change', 'TownController@changeTown')->name('town.change');
