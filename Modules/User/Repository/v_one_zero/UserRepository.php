@@ -122,7 +122,7 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
         if ($check->count() > 0) {
             $check->delete();
             $type = 'success';
-            $message = 'You are no more watching this movie'
+            $message = 'You are no more watching this movie';
             notify()->success($message);
             return [$type => $message];
         }

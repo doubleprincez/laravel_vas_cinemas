@@ -3,7 +3,7 @@
 @section('content')
     <div class="container jumbotron-fluid">
         @isset($movies)
-            <div class="flex mt-4">
+            <div class="flex flex-col mt-4">
                 <h3 class="text-danger font-weight-bold text-lg-center">{!! __('names.movies') !!} </h3>
                 <div class="row align-items-center">
                     @foreach($movies as $movie)
