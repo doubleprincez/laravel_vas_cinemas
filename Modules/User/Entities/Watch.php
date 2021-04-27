@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Cinema\Entities\Cinema;
 use Modules\Movie\Entities\Movie;
 
+/**
+ * Class Watch
+ * @package Modules\User\Entities
+ *
+ * @property int user_id
+ * @property int cinema_id
+ * @property int movie_id
+ * @property mixed start_time
+ */
 class Watch extends Model
 {
     use HasFactory;

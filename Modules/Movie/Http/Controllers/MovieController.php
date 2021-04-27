@@ -20,7 +20,7 @@ class MovieController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         $movies = $this->repo->latestMovies(['genre']);
         return view('movie::index', compact('movies'));
@@ -31,10 +31,9 @@ class MovieController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show($id): Renderable
     {
-        $movie = $this->repo->findById($id, ['genre', 'cinema', 'image']);
-
+        $movie = $this->repo->getMovie($id, ['genre', 'cinema', 'image']);
         return view('movie::show')->with(compact('movie'));
     }
 

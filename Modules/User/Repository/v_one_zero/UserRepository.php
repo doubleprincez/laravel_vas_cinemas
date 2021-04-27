@@ -36,7 +36,7 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
             if ($check->exists() == true) {
                 $query = $check->first();
             } else {
-                $query = $this->getModel();
+                $query = $this->getModel(new Watch());
             }
             // get movie showtime and store with record
             $query->cinema_id = $movie_id;
@@ -45,9 +45,8 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
             $query->start_time = $start_time;
             $query->save();
             return ['success' => 'Watching Saved'];
-        } else {
-            return ['error' => 'Seat Capacity is Full'];
         }
+        return ['error' => 'Seat Capacity is Full'];
 
     }
 

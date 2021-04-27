@@ -13,6 +13,15 @@ use Modules\Image\Entities\Image;
 use Modules\User\Entities\User;
 use Modules\User\Entities\Watch;
 
+/**
+ * @property mixed id
+ * @property mixed genre_id
+ * @property mixed title
+ * @property mixed movie_length
+ * @property mixed release_year
+ * @property mixed available
+ * @property mixed description
+ */
 class Movie extends Model
 {
     use HasFactory;
@@ -37,6 +46,26 @@ class Movie extends Model
     public function cinema(): belongsToMany
     {
         return $this->belongsToMany(Cinema::class, 'showtimes', 'movie_id', 'cinema_id')->withPivot(['start_time']);
+    }
+
+    public function format_movie(array $with = array())
+    {
+        if (auth()->check()) {
+            $select = Watch::where('user_id', auth()->id());
+            if ($select->count() > 0) {
+                $all_watched = collect($select->pluck('id')->toArray());
+                $watched = $all_watched->contains($this->id);
+            } else {
+                $watched = false;
+            }
+        } else {
+            $watched = false;
+        }
+        $relations = $this->load($with);
+
+        // format movie to include if user has watched the movie before
+        return json_decode(json_encode($relations->toArray() + ["watched" => $watched]));
+
     }
 
     public function watchers(): hasManyThrough

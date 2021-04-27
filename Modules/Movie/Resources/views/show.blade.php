@@ -32,6 +32,13 @@
                                             <p>
                                                 Time: {{ $time }}
                                             </p>
+                                            @if($movie->watched===true)
+                                                @if(now()->diff($cinema->pivot->start_time) > 1)
+                                                    <p>You are about to watch this movie</p>
+                                                @else
+                                                    <p>You have Watched this Movie</p>
+                                                @endif
+                                            @endif
                                             <p>
                                             <form action="{{ route('watch') }}" method="post">
                                                 @csrf
@@ -39,7 +46,7 @@
                                                 <input type="hidden" name="movie_id" value="{{ $movie->id }}">
                                                 <input type="hidden" name="start_time"
                                                        value="{{ $cinema->pivot->start_time}}">
-                                                <button type="submit" class="btn btn-outline-secondary">Watch</button>
+                                                <button type="submit" class="btn btn-outline-secondary"> Watch</button>
                                             </form>
                                             </p>
                                         </div>

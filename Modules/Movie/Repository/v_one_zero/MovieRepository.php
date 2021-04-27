@@ -22,4 +22,11 @@ class MovieRepository extends CoreRepository implements MovieInterface
         return $this->paginate($query->latest()->get());
     }
 
+    public function getMovie($id, array $with = array())
+    {
+        $movie = $this->findById($id, $with);
+
+        return  $movie->format_movie($with);
+    }
+
 }

@@ -31,8 +31,8 @@ class UserController extends Controller
      */
     public function watch()
     {
-        dd(request()->all());
-        return;
+//        dd(request()->all());
+//        return;
     }
 
     public function store_watch()
