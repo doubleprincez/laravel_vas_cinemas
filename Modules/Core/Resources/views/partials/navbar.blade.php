@@ -12,7 +12,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                <li class="nav-item {{ active(['cinema','cinema/*']) }}"><a href="{{ route('cinemas') }}"
+                                                                            class="nav-link">
+                        Cinema</a></li>
+                <li class="nav-item {{ active(['movies','movies/*']) }}"><a href="{{ route('movies') }}"
+                                                                            class="nav-link"> Movies</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

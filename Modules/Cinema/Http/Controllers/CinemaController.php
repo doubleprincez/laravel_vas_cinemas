@@ -22,8 +22,9 @@ class CinemaController extends Controller
     public function index()
     {
         $cinemas = $this->repo->allPaginated();
-
-        return view('cinema::index')->with(compact('cinemas'));
+        $town = $this->repo->getTown();
+        $towns = $this->repo->allTowns();
+        return view('cinema::index')->with(compact('cinemas', 'town', 'towns'));
     }
 
     /**
