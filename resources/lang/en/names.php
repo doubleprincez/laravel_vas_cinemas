@@ -14,5 +14,6 @@ return [
     'visit' => 'Visit',
     'read_more' => 'Read More',
     'list_of_cinemas' => 'List of Cinemas In ',
-    'watched_on'=>'Watched on '
+    'watched_on' => 'Watched on ',
+    'will_watch_on' => 'Will watch on '
 ];

@@ -25,11 +25,18 @@ interface UserInterface extends CoreInterface
      */
     public function get_raw_watchers($cinema_id, $movie_id, $start_time);
 
+
     /** Get a list of watched movie by current user grouped by cinema center
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
 
     public function watched();
 
+    /**
+     * Cancel a watch request
+     * @param array $attributes
+     * @return array
+     */
+    public function cancel(array $attributes = array());
 
 }

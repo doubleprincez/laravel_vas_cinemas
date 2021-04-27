@@ -26,7 +26,7 @@ class MovieRepository extends CoreRepository implements MovieInterface
     {
         $movie = $this->findById($id, $with);
 
-        return  $movie->format_movie($with);
+        return $movie->format_movie($with);
     }
 
 }

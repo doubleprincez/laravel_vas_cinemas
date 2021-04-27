@@ -53,8 +53,8 @@ class Movie extends Model
         if (auth()->check()) {
             $select = Watch::where('user_id', auth()->id());
             if ($select->count() > 0) {
-                $all_watched = collect($select->pluck('id')->toArray());
-                $watched = $all_watched->contains($this->id);
+                $watched = collect($select->get(['cinema_id', 'movie_id']));
+//                $watched = $all_watched->contains($this->id);
             } else {
                 $watched = false;
             }

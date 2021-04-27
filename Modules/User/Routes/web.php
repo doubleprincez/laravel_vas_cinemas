@@ -18,5 +18,7 @@ Route::get('/watch', 'UserController@watch')->name('watch');
 
 Route::post('/watch', 'UserController@store_watch')->name('watch');
 
+Route::post('/watch/cancel', 'UserController@cancel_watch')->name('watch.cancel');
+
 Route::get('/watched', 'UserController@watched')->name('watched');
 //});

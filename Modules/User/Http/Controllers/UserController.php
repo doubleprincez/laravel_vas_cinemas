@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 use Modules\User\Contracts\UserInterface as Repo;
 
 class UserController extends Controller
@@ -18,27 +19,36 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Store New user watch
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function index()
-    {
-        return view('user::index');
-    }
 
-    /**User can view all movies they have watched
-     *
-     */
-    public function watch()
+    public function store_watch(): \Illuminate\Http\RedirectResponse
     {
-//        dd(request()->all());
-//        return;
-    }
-
-    public function store_watch()
-    {
+        $valid = Validator::make(request()->all(), [
+            'movie_id' => 'required',
+            'cinema_id' => 'required',
+            'start_time' => 'required'
+        ]);
+        if ($valid->fails()) {
+            return back()->with(['error' => 'Unable to Watch Movie']);
+        }
         $store = $this->repo->store(request()->all());
         return back()->with($store);
+    }
+
+    public function cancel_watch()
+    {
+        $valid = Validator::make(request()->all(), [
+            'movie_id' => 'required',
+            'cinema_id' => 'required',
+            'start_time' => 'required'
+        ]);
+        if ($valid->fails()) {
+            return back()->with(['error' => 'Unable to Watch Movie']);
+        }
+        $cancel = $this->repo->cancel(request()->all());
+        return back()->with($cancel);
     }
 
     public function watched()

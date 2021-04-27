@@ -37,11 +37,11 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
                 $query = $check->first();
             } else {
                 $query = $this->getModel(new Watch());
+                $query->user_id = $user_id;
             }
             // get movie showtime and store with record
-            $query->cinema_id = $movie_id;
-            $query->movie_id = $cinema_id;
-            $query->user_id = $user_id;
+            $query->cinema_id = $cinema_id;
+            $query->movie_id = $movie_id;
             $query->start_time = $start_time;
             $query->save();
             return ['success' => 'Watching Saved'];
@@ -97,4 +97,24 @@ class UserRepository extends \Modules\Core\Repository\CoreRepository implements 
         return $query->where('user_id', $user_id)->latest()->get()->groupBy('cinema.name');
     }
 
+    /**
+     * Cancel a watch request
+     * @param array $attributes
+     * @return array
+     */
+    public function cancel(array $attributes = array()): array
+    {
+        $user_id = auth()->id();
+        $movie_id = (int)$attributes['movie_id'];
+        $cinema_id = (int)$attributes['cinema_id'];
+        $start_time = $attributes['start_time'];
+
+        $check = $this->get_raw_user_watching($user_id, $cinema_id, $movie_id, $start_time);
+//        dd(Watch::where('user_id', $user_id)->get());
+        if ($check->count() > 0) {
+            $check->delete();
+            return ['success' => 'You are no more watching this movie'];
+        }
+        return ['success' => 'Deleted already'];
+    }
 }
